@@ -29,8 +29,8 @@ services:
       start_period: 20s
     volumes:
       - mysql:/var/lib/mysql
+      # 新库使用完整初始化脚本；patch.sql 是历史升级脚本，重复执行会产生冲突。
       - ./docs/sql/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
-      - ./docs/sql/patch.sql:/docker-entrypoint-initdb.d/02-patch.sql:ro
     networks:
       jeepay:
         ipv4_address: 172.20.0.10
