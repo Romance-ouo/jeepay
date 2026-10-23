@@ -79,7 +79,7 @@ public class MchInfoController extends CommonCtrl {
             @Parameter(name = "pageNumber", description = "分页页码"),
             @Parameter(name = "pageSize", description = "分页条数"),
             @Parameter(name = "mchNo", description = "商户号", required = true),
-            @Parameter(name = "mchName", description = "商户名称"),
+            @Parameter(name = "mchName", description = "商户名称，支持模糊查询"),
             @Parameter(name = "isvNo", description = "服务商号"),
             @Parameter(name = "state", description = "状态: 0-停用, 1-启用"),
             @Parameter(name = "type", description = "类型: 1-普通商户, 2-特约商户(服务商模式)")
@@ -97,7 +97,7 @@ public class MchInfoController extends CommonCtrl {
             wrapper.eq(MchInfo::getIsvNo, mchInfo.getIsvNo());
         }
         if (StringUtils.isNotEmpty(mchInfo.getMchName())) {
-            wrapper.eq(MchInfo::getMchName, mchInfo.getMchName());
+            wrapper.like(MchInfo::getMchName, mchInfo.getMchName());
         }
         if (mchInfo.getType() != null) {
             wrapper.eq(MchInfo::getType, mchInfo.getType());
